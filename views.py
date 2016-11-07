@@ -12,8 +12,7 @@ def login_view(request):
         site_settings = SiteSetting.objects.get(pk=1)
         organization = site_settings.organization
         description = site_settings.description
-        background = site_settings.background.__str__().replace(
-            "static/SimpleBase/", "", 1)
+        background = site_settings.background
     except SiteSetting.DoesNotExist:
         organization = "My Organization"
         description = "An organization description will need to be set up in \

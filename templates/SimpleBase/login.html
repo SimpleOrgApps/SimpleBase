@@ -7,6 +7,6 @@
 {% if background %}
 we have a background yay
 {% load static %}
-<img src="{% static background %}">
+<img src="{{ MEDIA_URL }}{{ background }}">
 {% endif %}
 {% endblock %}
