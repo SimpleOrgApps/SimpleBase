@@ -1,0 +1,12 @@
+{% extends "SimpleBase/base.html" %}
+{% block title %}{{ organization }} -- Login{% endblock %}
+{% block heading %}Login{% endblock %}
+{% block content %}
+{{ organization }}
+{{ description }}
+{% if background %}
+we have a background yay
+{% load static %}
+<img src="{% static background %}">
+{% endif %}
+{% endblock %}
