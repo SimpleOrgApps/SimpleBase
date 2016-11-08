@@ -9,12 +9,31 @@
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-blue.min.css">
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" href="{% static 'SimpleBase/css/base.css' %}">
+
+        <style>
+            .layout-transparent {
+                {% if template_settings.background %}
+                background: url('{{ MEDIA_URL }}{{ template_settings.background }}') center / cover;
+                {% endif %}
+            }
+        </style>
         {% endblock %}
     </head>
     <body>
-        {% block content %}{% endblock %}
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-        <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+        <div class="mdl-layout mdl-js-layout {% if template_settings.background %}layout-transparent{% endif %}">
+            {% block header %}
+            {% include 'SimpleBase/includes/header.html' %}
+            {% endblock %}
+            <main class="mdl-layout__content mdl-grid">
+                {% block content %}{% endblock %}
+            </main>
+            {% block footer %}
+            {% include 'SimpleBase/includes/footer.html' %}
+            {% endblock %}
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+            <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+        </div>
     </body>
 </html>

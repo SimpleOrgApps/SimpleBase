@@ -1,0 +1,29 @@
+{% if background %}
+<div class="scrim">&nbsp;</div>
+{% endif %}
+<header class="mdl-layout__header mdl-layout__header--scroll {% if template_settings.background %}mdl-layout__header--transparent{% endif %}">
+    <div class="mdl-layout__header-row">
+        <!-- Title -->
+        <span class="mdl-layout-title">{{ template_settings.organization }}</span>
+        <!-- Add spacer, to align navigation to the right -->
+        <div class="mdl-layout-spacer"></div>
+        <!-- Navigation -->
+        <nav class="mdl-navigation">
+            {% block titlebar_navigation %}
+            {% for link in template_settings.titlebar_links %}
+            <a class="mdl-navigation__link" href="{{ link.url }}">{{ link.name }}</a>
+            {% endfor %}
+            {% endblock %}
+        </nav>
+    </div>
+</header>
+<div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">{{ template_settings.organization }}</span>
+    <nav class="mdl-navigation">
+        {% block sidebar_navigation %}
+        {% for link in template_settings.sidebar_links %}
+        <a class="mdl-navigation__link" href="{{ link.url }}">{{ link.name }}</a>
+        {% endfor %}
+        {% endblock %}
+    </nav>
+</div><br/>
