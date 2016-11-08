@@ -7,5 +7,13 @@ class SiteSetting(models.Model):
     background = models.ImageField(upload_to='background', null=True,
                                    blank=True)
 
-    def __str__(self):
-        return self.organization
+class SidebarLink(models.Model):
+    url = models.CharField(max_length=75)
+    name = models.CharField(max_length=75)
+    settings = models.ForeignKey(SiteSetting, on_delete=models.CASCADE)
+
+# These will not be available on Mobile
+class TitlebarLink(models.Model):
+    url = models.CharField(max_length=75)
+    name = models.CharField(max_length=75)
+    settings = models.ForeignKey(SiteSetting, on_delete=models.CASCADE)

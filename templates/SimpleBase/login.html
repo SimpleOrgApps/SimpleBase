@@ -26,17 +26,28 @@
     }
 
     .mdl-layout__content {
-        margin-top: 48px;
-        margin-bottom: 48px;
+        width: 90%;
+        max-width: 1000px;
     }
 
-    .mdl-layout__content section:not(:last-of-type) {
-        margin-bottom: 48px;
+    .mdl-layout__content section {
+        margin-top: auto;
+        margin-bottom: auto;
+        padding: 0;
     }
 
-    .error-card {
-        color: #f44336;
+    .mdl-layout__content section .mdl-card__title {
+        width: 100%;
     }
+
+    .mdl-layout__content section .mdl-card__supporting-text {
+        margin: 0 auto;
+    }
+
+    .mdl-layout__content section .mdl-card__supporting-text button {
+        width: 100%;
+    }
+
 </style>
 
 <div class="mdl-layout mdl-js-layout {% if background %}layout-transparent{% endif %}">
@@ -51,27 +62,28 @@
             <div class="mdl-layout-spacer"></div>
             <!-- Navigation -->
             <nav class="mdl-navigation">
-                <a class="mdl-navigation__link" href="#">Homepage</a>
+                {% if titlebar_links %}
+                {% for link in titlebar_links %}
+                <a class="mdl-navigation__link" href="{{ link.url }}">{{ link.name }}</a>
+                {% endfor %}
+                {% endif %}
             </nav>
         </div>
     </header>
     <div class="mdl-layout__drawer">
         <span class="mdl-layout-title">{{ organization }}</span>
         <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="#">Homepage</a>
+            {% if sidebar_links %}
+            {% for link in sidebar_links %}
+            <a class="mdl-navigation__link" href="{{ link.url }}">{{ link.name }}</a>
+            {% endfor %}
+            {% endif %}
         </nav>
     </div><br/>
     <main class="mdl-layout__content mdl-grid">
-        <section class="section-center mdl-card mdl-shadow--2dp mdl-cell--9-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-grid">
-            <div class="mdl-card__title">
-                <h2 class="mdl-card__title-text">{{ organization }} -- Login</h2>
-            </div>
-            <div class="mdl-card__supporting-text">{{ description }}</div>
-        </section>
-
-        <section class="section-center mdl-card mdl-shadow--2dp mdl-grid mdl-cell--9-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
-            <div class="mdl-card__title">
-                <h2 class="mdl-card__title-text">Login</h2>
+        <section class="section-center mdl-card mdl-shadow--2dp mdl-cell--6-col-desktop mdl-cell--6-col-tablet mdl-cell--12-col-phone mdl-grid">
+            <div class="mdl-card__title mdl-color--primary-dark">
+                <h2 class="mdl-card__title-text mdl-color-text--primary-contrast">Login</h2>
             </div>
             <div class="mdl-card__supporting-text">
                 <form method="post" action="" id="login">
@@ -84,10 +96,10 @@
                         {{ form.password }}
                         <label class="mdl-textfield__label" for="{{ form.password.id_for_label }}">Password</label>
                     </div>
+                    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                        Log in
+                    </button>
                 </form>
-            </div>
-            <div class="mdl-card__actions">
-                <button type="submit" form="login" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Log in</button>
             </div>
         </section>
     </main>
