@@ -25,12 +25,15 @@
             {% block header %}
             {% include 'SimpleBase/includes/header.html' %}
             {% endblock %}
-            <main class="mdl-layout__content mdl-grid">
-                {% block content %}{% endblock %}
+            <main class="mdl-layout__content">
+                <div class="mdl-grid main-content">
+                    {% block content %}{% endblock %}
+                </div>
+                {% block footer %}
+                <div class="mdl-layout-spacer"></div>
+                {% include 'SimpleBase/includes/footer.html' %}
+                {% endblock %}
             </main>
-            {% block footer %}
-            {% include 'SimpleBase/includes/footer.html' %}
-            {% endblock %}
         </div>
         {% block js %}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
