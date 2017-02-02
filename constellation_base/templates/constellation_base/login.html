@@ -1,11 +1,11 @@
-{% extends "SimpleBase/base.html" %}
+{% extends "constellation_base/base.html" %}
 
 {% block title %}{{ template_settings.organization }} -- Login{% endblock %}
 
 {% block head %}
 {{ block.super }}
 {% load static %}
-<link rel="stylesheet" href="{% static 'SimpleBase/css/login.css' %}">
+<link rel="stylesheet" href="{% static 'constellation_base/css/login.css' %}">
 {% endblock %}
 
 {% block content %}

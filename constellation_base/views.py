@@ -14,7 +14,7 @@ def login_view(request):
         if user:
             login(request, user)
             return HttpResponseRedirect("/")
-    return render(request, 'SimpleBase/login.html', {
+    return render(request, 'constellation_base/login.html', {
         'form': form,
         'template_settings': template_settings,
     })
