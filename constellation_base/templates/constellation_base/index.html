@@ -1,0 +1,29 @@
+{% extends "constellation_base/base.html" %}
+
+{% block title %}{{ template_settings.organization }} -- Index{% endblock %}
+
+{% block head %}
+{{ block.super }}
+{% load static %}
+<link rel="stylesheet" href="{% static 'constellation_base/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="mdl-grid">
+{% for app in apps %}
+<div id="{{ app.name }}-dash" class="mdl-card mdl-cell mdl-shadow--2dp mdl-cell--6-col-desktop mdl-cell--4-col-tablet mdl-cell--12-col-phone mdl-grid">
+</div>
+{% endfor %}
+</div>
+{% endblock %}
+
+{% block js %}
+{{ block.super }}
+{% for app in apps %}
+<script>
+    $.get("{{ app.url }}", function(response){
+        $('#{{ app.name }}-dash').html(response);
+    })
+</script>
+{% endfor %}
+{% endblock %}
