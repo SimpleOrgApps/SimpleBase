@@ -24,6 +24,7 @@
                 {{ form.password }}
                 <label class="mdl-textfield__label" for="{{ form.password.id_for_label }}">Password</label>
             </div>
+            <input type="hidden" name="next" value="{{ next }}" />
             <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
                 Log in
             </button>
