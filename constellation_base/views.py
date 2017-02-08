@@ -4,7 +4,7 @@ from django.contrib.auth import login, logout
 from django.conf import settings
 from django.utils.module_loading import import_module
 from django.urls import reverse
-
+from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 
 from .forms import LoginForm
@@ -48,3 +48,7 @@ def login_view(request):
         'template_settings': template_settings,
         'next': next_page,
     })
+
+def logout_view(request):
+    logout(request)
+    return redirect("Login")
