@@ -15,7 +15,7 @@ setup(
     long_description = README,
     url = 'https://github.com/ConstellationApps/',
     author = 'Constellation Developers',
-    author_email = 'aldridge.mac@gmail.com',
+    author_email = 'bugs@constellationapps.org',
     install_requires=[
         'django',
         'Pillow',
@@ -28,6 +28,7 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Topic :: Internet :: WWW/HTTP',
-        'Topic :: Internet :: WWW/HTTP :: Dynamic Content'
+        'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
+        'Development Status :: 4 - Beta'
     ]
 )
