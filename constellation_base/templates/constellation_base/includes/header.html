@@ -20,6 +20,7 @@
         </nav>
     </div>
 </header>
+{% if template_settings.sidebar_links %}
 <div class="mdl-layout__drawer">
     <span class="mdl-layout-title">{{ template_settings.organization }}</span>
     <nav class="mdl-navigation">
@@ -29,4 +30,6 @@
         {% endfor %}
         {% endblock %}
     </nav>
-</div><br/>
+</div>
+{% endif %}
+<br/>
