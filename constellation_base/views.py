@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.contrib.auth import login, logout
 from django.conf import settings
 from django.utils.module_loading import import_module
@@ -8,7 +8,8 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 
 from .forms import LoginForm
-from .models import GlobalTemplateSettings, SidebarLink, TitlebarLink
+from .models import GlobalTemplateSettings
+
 
 @login_required
 def index_view(request):
@@ -16,16 +17,19 @@ def index_view(request):
     template_settings = template_settings_object.settings_dict()
     constellation_apps = []
     for appname in settings.INSTALLED_APPS:
-        if not "django" in appname:
+        if "django" not in appname:
             app = import_module(appname)
-            if hasattr(app.views, 'view_dashboard'):
-                constellation_apps.append({'name': appname,
-                                           'url': reverse(app.views.view_dashboard)})
+            if hasattr(app, 'views') and hasattr(app.views, 'view_dashboard'):
+                constellation_apps.append({
+                    'name': appname,
+                    'url': reverse(app.views.view_dashboard)
+                })
 
     return render(request, 'constellation_base/index.html', {
         'template_settings': template_settings,
         'apps': constellation_apps,
     })
+
 
 def login_view(request):
     template_settings_object = GlobalTemplateSettings(allowBackground=True)
@@ -48,6 +52,7 @@ def login_view(request):
         'template_settings': template_settings,
         'next': next_page,
     })
+
 
 def logout_view(request):
     logout(request)
