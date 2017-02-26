@@ -21,7 +21,7 @@
         {% endblock %}
     </head>
     <body>
-        <div class="mdl-layout mdl-js-layout {% if template_settings.background %}layout-transparent{% endif %}">
+        <div class="mdl-layout mdl-js-layout mdl-layout--no-desktop-drawer-button {% if template_settings.background %}layout-transparent{% endif %}">
             {% block header %}
             {% include 'constellation_base/includes/header.html' %}
             {% endblock %}

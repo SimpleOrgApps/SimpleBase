@@ -26,3 +26,8 @@
     -webkit-flex-direction: column;
     flex-direction: column;
 }
+
+.mdl-layout-title a {
+    color: inherit;
+    text-decoration: none;
+}

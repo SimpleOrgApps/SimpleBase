@@ -1,8 +1,5 @@
 from django.contrib import admin
-from .models import SiteSetting, SidebarLink, TitlebarLink
-
-class SidebarLinkInline(admin.TabularInline):
-    model = SidebarLink
+from .models import SiteSetting, TitlebarLink
 
 class TitlebarLinkInline(admin.TabularInline):
     model = TitlebarLink
@@ -10,7 +7,6 @@ class TitlebarLinkInline(admin.TabularInline):
 
 class SiteSettingAdmin(admin.ModelAdmin):
     inlines = [
-        SidebarLinkInline,
         TitlebarLinkInline,
     ]
     def has_add_permission(self, request):
