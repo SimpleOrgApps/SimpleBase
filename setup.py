@@ -6,21 +6,21 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 README = open(os.path.join(os.path.dirname(__file__), 'README.md')).read()
 
 setup(
-    name = 'Constellation-Base',
-    version = '0.1.2',
-    packages = ['constellation_base'],
-    include_package_data = True,
-    license = 'ISC License',
-    description = 'Base components of the Constellation Suite',
-    long_description = README,
-    url = 'https://github.com/ConstellationApps/',
-    author = 'Constellation Developers',
-    author_email = 'bugs@constellationapps.org',
+    name='Constellation-Base',
+    version='0.1.3',
+    packages=['constellation_base'],
+    include_package_data=True,
+    license='ISC License',
+    description='Base components of the Constellation Suite',
+    long_description=README,
+    url='https://github.com/ConstellationApps/',
+    author='Constellation Developers',
+    author_email='bugs@constellationapps.org',
     install_requires=[
         'django',
         'Pillow',
     ],
-    classifiers =[
+    classifiers=[
         'Environment :: Web Environment',
         'Framework :: Django',
         'Intended Audience :: Developers',
