@@ -1,5 +1,6 @@
 from django.db import models
-from django.conf import settings
+from django.contrib.auth.models import Group
+
 
 class SiteSetting(models.Model):
     organization = models.CharField(max_length=75)
@@ -7,11 +8,13 @@ class SiteSetting(models.Model):
     background = models.ImageField(upload_to='background', null=True,
                                    blank=True)
 
+
 # These will not be available on Mobile
 class TitlebarLink(models.Model):
     url = models.CharField(max_length=75)
     name = models.CharField(max_length=75)
     settings = models.ForeignKey(SiteSetting, on_delete=models.CASCADE)
+
 
 class GlobalTemplateSettings():
     def __init__(self, allowBackground):
@@ -39,3 +42,19 @@ class GlobalTemplateSettings():
             'organization': self.organization,
             'titlebar_links': self.titlebar_links,
         }
+
+
+class LocalGroupACLEntry(models.Model):
+    """ACL for Local Groups that don't exist in other authentication sources"""
+    group = models.ForeignKey(Group)
+
+    # This is a string since the user might not exist at the time they log in
+    # and need this to be applied
+    username = models.CharField(max_length=150)
+
+    def __str__(self):
+        return "{0}: {1}".format(self.group, self.username)
+
+    class Meta:
+        verbose_name = "Supplemental Group ACL Entry"
+        verbose_name_plural = "Supplemental Group ACL Entries"
