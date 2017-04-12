@@ -5,11 +5,15 @@ from django.conf import settings
 from django.utils.module_loading import import_module
 from django.urls import reverse
 from django.shortcuts import redirect
+from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.contrib.admin.views.decorators import staff_member_required
+from django.views import View
 
 from .forms import LoginForm
 from .models import GlobalTemplateSettings
-
+from .models import LocalGroupACLEntry
 
 @login_required
 def index_view(request):
@@ -57,3 +61,27 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect("Login")
+
+
+@method_decorator(staff_member_required, name='dispatch')
+class manage_groups(View):
+    
+    def get(self, request):
+        """Show a list of the supplemental groups"""
+        template_settings_object = GlobalTemplateSettings(allowBackground=True)
+        template_settings = template_settings_object.settings_dict()
+        
+        existing_groups = LocalGroupACLEntry.objects.values_list('group', flat=True)
+        existing_groups = Group.objects.filter(pk__in=set(existing_groups))
+
+        all_groups = Group.objects.all()
+        
+        return render(request, 'constellation_base/group_list.html', {
+            'template_settings': template_settings,
+            'existing_groups': existing_groups,
+            'all_groups': all_groups
+        })
+
+    def post(self, request):
+        print(request.POST)
+        return redirect('base_manage_groups')

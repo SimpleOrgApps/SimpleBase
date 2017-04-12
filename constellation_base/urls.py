@@ -6,4 +6,6 @@ urlpatterns = [
     url(r'^$', views.index_view, name='Index'),
     url(r'^login$', views.login_view, name='Login'),
     url(r'^logout$', views.logout_view, name='Logout'),
+    url(r'^manage/groups$', views.manage_groups.as_view(),
+        name="base_manage_groups"),
 ]

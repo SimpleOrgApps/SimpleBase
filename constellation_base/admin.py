@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import SiteSetting, TitlebarLink, LocalGroupACL
+from .models import SiteSetting, TitlebarLink, LocalGroupACLEntry
 
 
 class TitlebarLinkInline(admin.TabularInline):
@@ -25,4 +25,4 @@ class SiteSettingAdmin(admin.ModelAdmin):
 
 
 admin.site.register(SiteSetting, SiteSettingAdmin)
-admin.site.register(LocalGroupACL)
+admin.site.register(LocalGroupACLEntry)

@@ -44,18 +44,17 @@ class GlobalTemplateSettings():
         }
 
 
-class LocalGroupACL(models.Model):
+class LocalGroupACLEntry(models.Model):
     """ACL for Local Groups that don't exist in other authentication sources"""
     group = models.ForeignKey(Group)
 
-    # This contains a delimited string of usernames that are members of this
-    # group.  The delimiter is not important because the check is just done
-    # with a 'user in groupACL.members' style check.
-    members = models.TextField()
+    # This is a string since the user might not exist at the time they log in
+    # and need this to be applied
+    username = models.CharField(max_length=150)
 
     def __str__(self):
-        return "Supplemental Group: {0}".format(self.group)
+        return "{0}: {1}".format(self.group, self.username)
 
     class Meta:
-        verbose_name = "Supplemental Group ACL"
-        verbose_name_plural = "Supplemental Group ACLs"
+        verbose_name = "Supplemental Group ACL Entry"
+        verbose_name_plural = "Supplemental Group ACL Entries"
