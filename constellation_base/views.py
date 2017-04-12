@@ -85,8 +85,9 @@ class manage_groups(View):
         })
 
     def post(self, request):
+
         with transaction.atomic():
-            group = Group.objects.get(pk=request.POST["group_id"])
+            group = Group.objects.get(name=request.POST["group_id"])
             # Clear the old membership entries
 
             LocalGroupACLEntry.objects.filter(group=group).delete()

@@ -1,5 +1,16 @@
 {% extends 'constellation_base/base.html' %}
 
+{% block head %}
+{{ block.super }}
+{% load static %}
+<link rel="stylesheet" href="{% static 'constellation_forms/css/getmdl-select.min.css' %}">
+{% endblock %}
+
+{% block js %}
+{{ block.super }}
+<script src="{% static 'constellation_vote/js/getmdl-select.min.js' %}"></script>
+{% endblock %}
+
 {% block title %}Supplemental Groups{% endblock %}
 
 {% block content %}
@@ -33,17 +44,27 @@
     </div>
     <div class="mdl-card__supporting-text">
         <form method="POST">
-            {% csrf_token %}
-            <select name="group_id">
-                {% for group in all_groups %}
-                <option value="{{ group.pk }}">{{ group.name }}</option>
-                {% endfor %}
-            </select>
-            <label for="group_id">Group Selector</label>
+{% csrf_token %}
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height">
+                <input class="mdl-textfield__input" type="text" id="group_id" name="group_id" tabIndex="-1" readonly>
+                <label for="group_id">
+                    <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+                </label>
+                <label for="group_id" class="mdl-textfield__label">Group</label>
+                <ul for="group_id" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                    {% for group in all_groups %}
+                    <li class="mdl-menu__item" data-val="{{ group.pk }}">{{ group.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <br />
 
-            <textarea name="membership_listing" cols="75" rows="4"></textarea>
-            <label for="membership_listing">Membership Listing</label>
-            <input type="submit" />
+            <div class="mdl-textfield mdl-js-textfield">
+                <textarea class="mdl-textfield__input" type="text" rows= "3" id="membership_listing" name="membership_listing" ></textarea>
+                <label class="mdl-textfield__label" for="membership_listing">List of Group Members</label>
+            </div>
+            <br />
+            <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"/>
         </form>
     </div>
 </div>
