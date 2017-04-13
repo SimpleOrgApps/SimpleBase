@@ -1,3 +1,10 @@
+.dashboard {
+    column-count: 2;
+    column-gap: 0;
+}
+
 .dashboard .mdl-card {
-    flex-flow: column;
+    display: inline-flex;
+    margin: 8px;
+    width: calc(100% - 16px);
 }
