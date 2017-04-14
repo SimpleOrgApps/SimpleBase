@@ -7,6 +7,10 @@ header, nav, footer {
     display: none;
 }
 
+#message-toast {
+    display: none;
+}
+
 .mdl-layout__drawer, .scrim {
     display: none;
 }
