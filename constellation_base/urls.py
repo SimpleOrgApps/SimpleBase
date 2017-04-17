@@ -2,6 +2,7 @@ from django.conf.urls import url
 
 from . import views
 
+app_name = 'constellation_base'
 urlpatterns = [
     url(r'^$', views.index_view, name='Index'),
     url(r'^login$', views.login_view, name='Login'),

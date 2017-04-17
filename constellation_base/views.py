@@ -27,7 +27,7 @@ def index_view(request):
             if hasattr(app, 'views') and hasattr(app.views, 'view_dashboard'):
                 constellation_apps.append({
                     'name': appname,
-                    'url': reverse(app.views.view_dashboard)
+                    'url': reverse(appname + ':' + 'view_dashboard')
                 })
 
     return render(request, 'constellation_base/index.html', {
@@ -61,7 +61,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect("Login")
+    return redirect("constellation_base:Login")
 
 
 @method_decorator(staff_member_required, name='dispatch')
@@ -100,7 +100,7 @@ class manage_groups(View):
                 lgacle.group = group
                 lgacle.save()
 
-        return redirect('base_manage_groups')
+        return redirect('constellation_base:base_manage_groups')
 
 
 @staff_member_required
@@ -110,4 +110,4 @@ def manage_group_delete(request, group_id):
         group = Group.objects.get(pk=group_id)
         LocalGroupACLEntry.objects.filter(group=group).delete()
 
-    return redirect('base_manage_groups')
+    return redirect('constellation_base:base_manage_groups')
