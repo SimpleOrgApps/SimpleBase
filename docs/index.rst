@@ -10,6 +10,7 @@ Welcome to Constellation Base's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   admin/index
    suite/index
 
 Indices and tables
