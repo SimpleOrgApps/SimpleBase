@@ -46,7 +46,7 @@ class GlobalTemplateSettings():
 
 class LocalGroupACLEntry(models.Model):
     """ACL for Local Groups that don't exist in other authentication sources"""
-    group = models.ForeignKey(Group)
+    group = models.ForeignKey(Group, on_delete=models.PROTECT)
 
     # This is a string since the user might not exist at the time they log in
     # and need this to be applied
